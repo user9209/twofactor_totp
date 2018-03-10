@@ -106,14 +106,13 @@ class SettingsController extends Controller {
 	}
 
 	/**
-	 * The user's cloud id, e.g. "christina@university.domain/owncloud"
+	 * The user's display name with fallback to user id, e.g. "Christina Maier"
 	 *
 	 * @return string
 	 */
 	private function getSecretName() {
-		$productName = $this->defaults->getName();
-		$userName = $this->userSession->getUser()->getCloudId();
-		return rawurlencode("$productName:$userName");
+		$userName = $this->userSession->getUser()->getDisplayName();
+		return rawurlencode("$userName");
 	}
 
 	/**
