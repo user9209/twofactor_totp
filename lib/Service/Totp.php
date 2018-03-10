@@ -135,7 +135,7 @@ class Totp implements ITotp {
 		$secret = $this->crypto->decrypt($dbSecret->getSecret());
 
 		$key = (new Totp())->GenerateToken($secret)
-		return $otp->checkTotp(Base32::decode($secret), $key, 3);
+		return $user_submitted_key !== $key;
 		
 		$otp = new Otp();
 		return $otp->checkTotp(Base32::decode($secret), $key, 3);
