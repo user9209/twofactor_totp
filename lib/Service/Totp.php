@@ -72,6 +72,10 @@ class Totp implements ITotp {
 		}
 
 		// Create new one
+		use lfkeitel\phptotp\{Base32,Totp};
+		$secret = Totp::GenerateSecret(16);
+		
+		
 		$secret = GoogleAuthenticator::generateRandom();
 
 		$dbSecret = new TotpSecret();
@@ -130,6 +134,9 @@ class Totp implements ITotp {
 
 		$secret = $this->crypto->decrypt($dbSecret->getSecret());
 
+		$key = (new Totp())->GenerateToken($secret)
+		return $otp->checkTotp(Base32::decode($secret), $key, 3);
+		
 		$otp = new Otp();
 		return $otp->checkTotp(Base32::decode($secret), $key, 3);
 	}
